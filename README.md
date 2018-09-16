@@ -1,4 +1,4 @@
-# adaptivelending
+# pepelats
 
 > A Vue.js project
 
