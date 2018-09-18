@@ -1,46 +1,70 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
+    <Navigation @onSettingsPopup="onSettingsPopup"></Navigation>
+    <SettingsPopupForm :flag="flag" @onSettingsPopup="onSettingsPopup"></SettingsPopupForm>
   </div>
 </template>
 
 <script>
+import Navigation from './assets/components/Navigation.vue'
+import SettingsPopupForm from './assets/components/SettingsPopupForm.vue'
 export default {
-  name: 'app',
+  components: {
+    Navigation,
+    SettingsPopupForm
+  },
   data () {
     return {
-      msg: 'Vue + Express'
+      flag: false,
+    }
+  },
+  methods: {
+    onSettingsPopup(){
+      this.flag = !this.flag;
     }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
+*{
+  margin: 0;
   padding: 0;
+  text-decoration: none;
+  color: #111;
+  box-sizing: border-box;
+  list-style: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
+@keyframes SettingsIconRotate {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
 }
-
-a {
-  color: #42b983;
+@keyframes CloseIconScale {
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.3);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+@keyframes FormPopupScale {
+  0%{
+    transform: scale(0.5);
+  }
+  50%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
 }
 </style>
