@@ -1,7 +1,7 @@
 <template>
   <div class="settings-popup-form" v-show="flag">
     <div class="overley" @click.self="onClose">
-      <div class="popup" :class="{ scale:  flag}">
+      <div class="popup" :class="{scale:  flag}">
         <div class="btn-close" @click="onClose">
           <i class="far fa-times-circle"></i>
         </div>
@@ -18,7 +18,7 @@
             <div class="form-title">Закрывающий тег</div>
             <input class="" type="text" placeholder="Введите закрывающий тег ...">
           </label>
-          <submit class="form-submit-button">Apply</submit>
+          <div class="form-submit-button">Apply</div>
         </form>
       </div>
     </div>
