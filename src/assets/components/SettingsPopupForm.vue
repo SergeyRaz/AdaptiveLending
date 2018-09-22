@@ -1,8 +1,8 @@
 <template>
-  <div class="settings-popup-form" v-show="flag">
-    <div class="overley" @click.self="onClose">
-      <div class="popup" :class="{scale:  flag}">
-        <div class="btn-close" @click="onClose">
+  <div class="settings-popup-form" v-show="showSettingsForm">
+    <div class="overley" @click.self="closeSettingsForm">
+      <div class="popup" :class="{scale: showSettingsForm}">
+        <div class="btn-close" @click="closeSettingsForm">
           <i class="far fa-times-circle"></i>
         </div>
         <form action="">
@@ -27,18 +27,19 @@
 
 <script>
 export default {
-  props: ['flag'],
   data () {
     return {
       
     }
   },
-  propertise: {
-    
+  computed: {
+    showSettingsForm() {
+      return this.$store.state.showSettingsForm
+    }
   },
   methods: {
-    onClose(){
-      this.$emit('onSettingsPopup');
+    closeSettingsForm(){
+      this.$store.commit('openSettingsForm');
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="navigation">
     <ul class="list">
-      <span class="settings-icon" @click="onSettingsPopup"><i class="fas fa-cog"></i></span>
+      <span class="settings-icon" @click="openSettingsForm"><i class="fas fa-cog"></i></span>
       <li class="item"><a href="#" class="link">Vue JS</a></li>
       <li class="item"><a href="#" class="link">Express JS</a></li>
       <li class="item"><a href="#" class="link">Mongo DB</a></li>
@@ -19,8 +19,8 @@ export default {
     }
   },
   methods: {
-    onSettingsPopup(){
-      this.$emit('onSettingsPopup');
+    openSettingsForm(){
+      this.$store.commit('openSettingsForm');
     }
   }
 }
