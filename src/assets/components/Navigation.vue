@@ -1,13 +1,16 @@
 <template>
   <div class="Navigation">
     <ul class="list">
-      <span class="settings-icon" @click="openSettingsForm"><i class="fas fa-cog"></i></span>
       <li class="item"><a href="#" class="link">Video</a></li>
       <li class="item"><a href="#" class="link">Express JS</a></li>
       <li class="item"><a href="#" class="link">Mongo DB</a></li>
       <li class="item"><a href="#" class="link">Webpack</a></li>
       <li class="item"><a href="#" class="link">SCSS</a></li>
     </ul>
+    <div class="authorizing">
+      <div class="authorizing-reg" @click="openAuthorizingForm('reg')">Регистрация</div>
+      <div class="authorizing-login" @click="openAuthorizingForm('login')">Вход</div>
+    </div>
   </div>
 </template>
 
@@ -17,8 +20,8 @@ export default {
     return {};
   },
   methods: {
-    openSettingsForm() {
-      this.$store.commit("openSettingsForm");
+    openAuthorizingForm(flagAuthorizing) {
+      this.$store.commit("openAuthorizingForm", flagAuthorizing);
     }
   }
 };
@@ -27,45 +30,44 @@ export default {
 <style lang="scss">
 .Navigation {
   width: 100%;
-  height: 100vh;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../img/bg.png");
   .list {
     position: relative;
-    .settings-icon {
-      position: absolute;
-      right: -18px;
-      top: -18px;
-      cursor: pointer;
-      i {
-        animation: SettingsIconRotate 5s linear infinite;
-        color: #888;
-        font-size: 18px;
+    display: flex;
+    .item {
+      padding: 3px;
+      .link {
+        display: block;
+        padding: 5px 35px;
+        border: 1px solid #ccc;
+        transition: 0.1s ease-out;
+        background-color: #fdfdfd;
         &:hover {
-          animation-play-state: paused;
-          color: #ff8500;
+          border: 1px solid #888;
         }
       }
     }
-    .item {
-      padding: 3px;
-      transition: 0.2s ease-out;
+  }
+  .authorizing {
+    cursor: pointer;
+    position: absolute;
+    right: 70px;
+    display: flex;
+    .authorizing-reg,
+    .authorizing-login {
+      padding: 5px 15px;
+      border: 1px solid #ccc;
+      background-color: #fdfdfd;
+      transition: 0.1s ease-out;
       &:hover {
-        transform: translateX(5px);
-        .link {
-          background-color: #ff8500;
-          color: #fff;
-        }
+        border: 1px solid #888;
       }
-      .link {
-        display: block;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 5px 35px;
-        color: rgba(255, 255, 255, 0.3);
-        text-shadow: 0 0 2px #000;
-      }
+    }
+    .authorizing-reg {
+      margin-right: 5px;
     }
   }
 }

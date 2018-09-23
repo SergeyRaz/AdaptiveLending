@@ -1,32 +1,39 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import path from 'path'
-import history from 'connect-history-api-fallback'
+import express from "express";
+import bodyParser from "body-parser";
+import path from "path";
+import history from "connect-history-api-fallback";
+import webpack from "webpack";
+import webpackMiddleware from "webpack-dev-middleware";
+import webpackHotMiddleware from "webpack-hot-middleware";
+import webpackConfig from "../webpack.config.dev";
+import auth from "./routes/auth";
+// import session from "express-session";
+// import KnexSessionStore from "connect-session-knex";
 
-const port = process.env.PORT || 5000
-const app = express()
+const port = process.env.PORT || 5000;
+const app = express();
 
-app.use(history())
-app.use(bodyParser.json())
-app.use('/dist', express.static('dist'))
+app.use(history());
+app.use(bodyParser.json());
+app.use("/dist", express.static("dist"));
 
-import webpack from 'webpack'                               
-import webpackMiddleware from 'webpack-dev-middleware'      
-import webpackHotMiddleware from 'webpack-hot-middleware'   
-import webpackConfig from '../webpack.config.dev'           
- 
-if (process.env.NODE_ENV === 'development') {
-  const compiler = webpack(webpackConfig)                     
-  app.use(webpackMiddleware(compiler, {                       
-    hot: true,                                                
-    publicPath: webpackConfig.output.publicPath,              
-    noInfo: true                                              
-  }))                                                         
-  app.use(webpackHotMiddleware(compiler)) 
+if (process.env.NODE_ENV === "development") {
+  const compiler = webpack(webpackConfig);
+  app.use(
+    webpackMiddleware(compiler, {
+      hot: true,
+      publicPath: webpackConfig.output.publicPath,
+      noInfo: true
+    })
+  );
+  app.use(webpackHotMiddleware(compiler));
 }
+app.use("/api/auth", auth);
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'))
-})
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../index.html"));
+});
 
-app.listen(port, () => console.log('Server listen on port =', port, 'ENV =', process.env.NODE_ENV))
+app.listen(port, () =>
+  console.log("Server listen on port =", port, "ENV =", process.env.NODE_ENV)
+);

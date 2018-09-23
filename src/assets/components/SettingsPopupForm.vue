@@ -1,47 +1,85 @@
 <template>
-  <div class="SettingsPopupForm" v-show="showSettingsForm">
-    <div class="overley" @click.self="closeSettingsForm">
-      <div class="popup" :class="{scale: showSettingsForm}">
-        <div class="btn-close" @click="closeSettingsForm">
-          <i class="far fa-times-circle"></i>
+  <div class="SettingsPopupForm">
+
+    <div class="settings-popup-form-wrap" v-show="showAuthorizingForm.type == 'reg'">
+      <div class="overley" @click.self="closeSettingsForm">
+        <div class="popup" :class="{scale: showAuthorizingForm}">
+          <div class="btn-close" @click="closeSettingsForm">
+            <i class="far fa-times-circle"></i>
+          </div>
+          <form @submit.prevent="auth(model)">
+            <label for="">
+              <div class="form-title">Введите Email</div>
+              <input class="" type="text" placeholder="Email ..." v-model.lazy="model.email">
+            </label>
+            <label for="">
+              <div class="form-title">Введите пароль</div>
+              <input class="" type="password" placeholder="Пароль ..." v-model.lazy="model.password">
+            </label>
+            <label for="">
+              <div class="form-title">Введите пароль повторно</div>
+              <input class="" type="password" placeholder="Пароль повторно ..." v-model.lazy="model.repassword">
+            </label>
+            <button class="form-submit-button">Регистрация</button>
+          </form>
         </div>
-        <form action="">
-          <label for="">
-            <div class="form-title">Открывающий тег</div>
-            <input class="" type="text" placeholder="Введите открывающий тег ...">
-          </label>
-          <label for="">
-            <div class="form-title">Текстовая область</div>
-            <textarea class="" placeholder="Введите текст ..." name="" id="" cols="20" rows="10"></textarea>
-          </label>
-          <label for="">
-            <div class="form-title">Закрывающий тег</div>
-            <input class="" type="text" placeholder="Введите закрывающий тег ...">
-          </label>
-          <div class="form-submit-button">Apply</div>
-        </form>
       </div>
     </div>
+
+    <div class="settings-popup-form-wrap" v-show="showAuthorizingForm.type == 'login'">
+      <div class="overley" @click.self="closeSettingsForm">
+        <div class="popup" :class="{scale: showAuthorizingForm}">
+          <div class="btn-close" @click="closeSettingsForm">
+            <i class="far fa-times-circle"></i>
+          </div>
+          <form @submit.prevent="auth(model)">
+            <label for="">
+              <div class="form-title">Введите Email</div>
+              <input class="" type="text" placeholder="Email ..." v-model.lazy="model.email">
+            </label>
+            <label for="">
+              <div class="form-title">Введите пароль</div>
+              <input class="" type="password" placeholder="Пароль ..." v-model.lazy="model.password">
+            </label>
+            <button class="form-submit-button" >Войти</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      model: {
+        email: "",
+        password: "",
+        repassword: null
+      }
+    };
   },
-  computed: mapGetters(["showSettingsForm"]),
+  computed: {
+    ...mapGetters(["showAuthorizingForm"])
+  },
   methods: {
+    ...mapActions(["auth"]),
     closeSettingsForm() {
-      this.$store.commit("openSettingsForm");
+      this.$store.commit("closeSettingsForm");
+      this.model.email = "";
+      this.model.password = "";
+      this.model.repassword = null;
     }
   }
 };
 </script>
 
 <style lang="scss">
-.SettingsPopupForm {
+.settings-popup-form-wrap {
   position: relative;
   .overley {
     position: fixed;
@@ -58,7 +96,6 @@ export default {
       cursor: default;
       position: relative;
       width: 600px;
-      height: 360px;
       background-color: #fff;
       border-radius: 3px;
       border-bottom-right-radius: 0;
@@ -74,12 +111,8 @@ export default {
         i {
           color: #fff;
           font-size: 20px;
-          animation: CloseIconScale 1s linear infinite;
           animation-delay: 10s;
           transition: 0.1s ease-out;
-          &:hover {
-            color: #ff8500;
-          }
         }
       }
       form {
@@ -107,9 +140,9 @@ export default {
           }
         }
         .form-submit-button {
-          padding: 5px 50px;
+          padding: 7px 50px;
           position: absolute;
-          bottom: -50px;
+          bottom: -51px;
           right: -20px;
           background-color: #fff;
           border: none;
@@ -118,11 +151,6 @@ export default {
           border-top-left-radius: 0;
           cursor: pointer;
           transition: 0.1s ease-out;
-          &:hover {
-            background-color: #ff8500;
-            color: #fff;
-            text-shadow: 0 0 2px #000;
-          }
         }
       }
     }
