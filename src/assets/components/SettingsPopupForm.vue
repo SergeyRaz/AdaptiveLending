@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-popup-form" v-show="showSettingsForm">
+  <div class="SettingsPopupForm" v-show="showSettingsForm">
     <div class="overley" @click.self="closeSettingsForm">
       <div class="popup" :class="{scale: showSettingsForm}">
         <div class="btn-close" @click="closeSettingsForm">
@@ -26,29 +26,24 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  data () {
-    return {
-      
-    }
+  data() {
+    return {};
   },
-  computed: {
-    showSettingsForm() {
-      return this.$store.state.showSettingsForm
-    }
-  },
+  computed: mapGetters(["showSettingsForm"]),
   methods: {
-    closeSettingsForm(){
-      this.$store.commit('openSettingsForm');
+    closeSettingsForm() {
+      this.$store.commit("openSettingsForm");
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-.settings-popup-form{
+.SettingsPopupForm {
   position: relative;
-  .overley{
+  .overley {
     position: fixed;
     top: 0;
     right: 0;
@@ -59,7 +54,7 @@ export default {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    .popup{
+    .popup {
       cursor: default;
       position: relative;
       width: 600px;
@@ -68,35 +63,36 @@ export default {
       border-radius: 3px;
       border-bottom-right-radius: 0;
       padding: 20px 20px;
-      &.scale{
+      &.scale {
         animation: FormPopupScale 0.3s ease-out;
       }
-      .btn-close{
+      .btn-close {
         position: absolute;
         top: -20px;
         right: -20px;
         cursor: pointer;
-        i{
+        i {
           color: #fff;
           font-size: 20px;
           animation: CloseIconScale 1s linear infinite;
           animation-delay: 10s;
           transition: 0.1s ease-out;
-          &:hover{
-            color: #FF8500;
+          &:hover {
+            color: #ff8500;
           }
         }
       }
-      form{
+      form {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         position: relative;
         height: 100%;
-        .form-title{
+        .form-title {
           padding: 3px 0px;
         }
-        input,textarea{
+        input,
+        textarea {
           padding: 10px;
           display: block;
           width: 100%;
@@ -104,13 +100,13 @@ export default {
           border-radius: 3px;
           resize: none;
           font-size: 12px;
-          &::-webkit-input-placeholder{
+          &::-webkit-input-placeholder {
             color: #ccc;
             font-weight: 300;
             letter-spacing: 1px;
           }
         }
-        .form-submit-button{
+        .form-submit-button {
           padding: 5px 50px;
           position: absolute;
           bottom: -50px;
@@ -122,8 +118,8 @@ export default {
           border-top-left-radius: 0;
           cursor: pointer;
           transition: 0.1s ease-out;
-          &:hover{
-            background-color: #FF8500;
+          &:hover {
+            background-color: #ff8500;
             color: #fff;
             text-shadow: 0 0 2px #000;
           }
