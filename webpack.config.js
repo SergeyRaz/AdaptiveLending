@@ -1,61 +1,58 @@
-var path = require('path')
-var webpack = require('webpack')
-var CompressionPlugin = require("compression-webpack-plugin")
+var path = require("path");
+var webpack = require("webpack");
+var CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
-  entry: [    
-    path.join(__dirname, '/src/app.js')
-  ],
+  entry: [path.join(__dirname, "/src/app.js")],
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    path: path.resolve(__dirname, "./dist"),
+    publicPath: "/dist/",
+    filename: "build.js"
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: "vue-loader",
         options: {
-          loaders: {
-          }
+          loaders: {}
           // other vue-loader options go here
         }
       },
-      { 
+      {
         test: /\.js$/,
-        loader: 'babel-loader',        
+        loader: "babel-loader",
         exclude: /node_modules/
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        loader: "json-loader"
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
+        test: /\.(png|jpg|gif|svg|mp4)$/,
+        loader: "file-loader",
         options: {
-          name: '[name].[ext]?[hash]'
+          name: "[name].[ext]?[hash]"
         }
       }
     ]
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      vue$: "vue/dist/vue.esm.js"
     }
   },
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'  
-}
+  devtool: "#eval-source-map"
+};
 
-module.exports.devtool = '#source-map'
+module.exports.devtool = "#source-map";
 module.exports.plugins = (module.exports.plugins || []).concat([
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.DefinePlugin({
-    'process.env': {
+    "process.env": {
       NODE_ENV: '"production"'
     }
   }),
@@ -64,13 +61,13 @@ module.exports.plugins = (module.exports.plugins || []).concat([
     beautify: false,
     comments: false,
     compress: {
-      sequences     : true,
-      booleans      : true,
-      loops         : true,
-      unused      : true,
-      warnings    : false,
+      sequences: true,
+      booleans: true,
+      loops: true,
+      unused: true,
+      warnings: false,
       drop_console: true,
-      unsafe      : true
+      unsafe: true
     }
   }),
   new CompressionPlugin({
@@ -83,4 +80,4 @@ module.exports.plugins = (module.exports.plugins || []).concat([
   new webpack.LoaderOptionsPlugin({
     minimize: true
   })
-])
+]);

@@ -3,11 +3,12 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-import StartPages from "./assets/components/StartPages.vue";
-import VideoPages from "./assets/components/VideoPages.vue";
-import E404 from "./assets/components/E404.vue";
+import StartPages from "./assets/components/pages/StartPages.vue";
+import VideoPages from "./assets/components/pages/VideoPages.vue";
+import E404 from "./assets/components/pages/E404.vue";
 const routes = [
   {
+    name: "home",
     path: "/",
     component: StartPages
   },
@@ -16,6 +17,7 @@ const routes = [
     component: E404
   },
   {
+    name: "video",
     path: "/video",
     component: VideoPages
   }

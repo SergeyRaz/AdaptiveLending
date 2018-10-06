@@ -19,11 +19,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../img/bg.png");
   h1 {
-    color: #fff;
     font-size: 10em;
-    text-shadow: 10px 10px 10px rgba(255, 255, 255, 0.1);
     margin-top: -150px;
     opacity: 0.5;
   }

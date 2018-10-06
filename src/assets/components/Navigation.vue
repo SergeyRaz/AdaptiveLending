@@ -1,11 +1,8 @@
 <template>
   <div class="Navigation">
     <ul class="list">
-      <li class="item"><a href="#" class="link">Video</a></li>
-      <li class="item"><a href="#" class="link">Express JS</a></li>
-      <li class="item"><a href="#" class="link">Mongo DB</a></li>
-      <li class="item"><a href="#" class="link">Webpack</a></li>
-      <li class="item"><a href="#" class="link">SCSS</a></li>
+      <li class="item"><router-link class="link" tag="a" :to="{name: 'home'}">Home</router-link></li>
+      <li class="item"><router-link class="link" tag="a" :to="{name: 'video'}">Video</router-link></li>
     </ul>
     <div class="authorizing">
       <div class="authorizing-reg" @click="openAuthorizingForm('reg')">Регистрация</div>

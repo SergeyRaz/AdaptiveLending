@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import StartPages from "./assets/components/StartPages.vue";
-import VideoPages from "./assets/components/VideoPages.vue";
-import E404 from "./assets/components/E404.vue";
+import StartPages from "./assets/components/pages/StartPages.vue";
+import VideoPages from "./assets/components/pages/VideoPages.vue";
+import E404 from "./assets/components/pages/E404.vue";
 
 export default {
   components: {
@@ -32,6 +32,10 @@ export default {
   list-style: none;
   outline: none;
   font-family: "Roboto", sans-serif;
+}
+h1 {
+  text-align: center;
+  font-size: 50px;
 }
 @keyframes SettingsIconRotate {
   0% {
